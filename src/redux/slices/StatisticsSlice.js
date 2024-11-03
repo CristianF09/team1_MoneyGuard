@@ -1,13 +1,13 @@
-/*Temporar*/
+/* Temporar */
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getTransactionsCategories,
   getTransactionsSummaryByPeriod,
-} from './operations';
+} from '../operations/StatisticsOperations';
 
 const initialState = {
   summary: [],
-  categories: [],
+  categories: [], // List of transaction categories
   isStatisticsLoading: false,
   isStatisticsError: null,
 };
@@ -17,7 +17,6 @@ const slice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-
       .addCase(getTransactionsCategories.fulfilled, (state, { payload }) => {
         state.isStatisticsLoading = false;
         state.categories = payload;

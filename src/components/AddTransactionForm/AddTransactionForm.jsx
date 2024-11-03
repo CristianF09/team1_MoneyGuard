@@ -7,13 +7,14 @@ import { useForm, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { format } from 'date-fns';
-import { selectCategories } from '../../redux/Statistics/selectors';
+import { selectCategories } from '../../redux/selectors/StatisticsSelectors';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { customStyles } from './customStyles';
 import { useDispatch } from 'react-redux';
-import { addTransactions } from '../../redux/Transactions/operations';
-import { closeAddModal } from '../../redux/Modals/slice';
+import { addTransaction } from '../../redux/operations/transactionsOperations';
+
+import { closeAddModal } from '../../redux/slices/ModalSlice';
 import CustomDropIndicator from '../CustomDropIndicator/CustomDropIndicator';
 
 function AddTransactionForm() {
@@ -64,17 +65,21 @@ function AddTransactionForm() {
 
   const onSubmit = data => {
     if (!isChecked) {
-      const categoryId = categories.filter(el => el.name === 'Income');
-      data.categoryId = categoryId[0].id;
+      const categoryId = categories.find(el => el.name === 'Income');
+      if (categoryId) {
+        data.categoryId = categoryId.id;
+      }
       data.type = 'INCOME';
       data.amount = Math.abs(data.amount);
     } else if (selectedOption) {
       data.categoryId = selectedOption.value;
       data.type = 'EXPENSE';
       data.amount = Math.abs(data.amount) * -1;
-    } else if (!selectedOption) {
-      const categoryId = categories.filter(el => el.name === 'Main expenses');
-      data.categoryId = categoryId[0].id;
+    } else {
+      const categoryId = categories.find(el => el.name === 'Main expenses');
+      if (categoryId) {
+        data.categoryId = categoryId.id;
+      }
       data.type = 'EXPENSE';
       data.amount = Math.abs(data.amount) * -1;
     }
@@ -85,7 +90,7 @@ function AddTransactionForm() {
 
     delete data.switch;
 
-    dispatch(addTransactions(data));
+    dispatch(addTransaction(data));
     dispatch(closeAddModal());
   };
 

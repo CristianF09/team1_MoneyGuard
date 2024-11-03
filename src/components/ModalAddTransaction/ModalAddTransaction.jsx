@@ -2,7 +2,10 @@ import Modal from 'react-modal';
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ModalAddTransaction.module.css';
-import { selectIsAddModalOpen, closeAddModal } from '../../redux/Modals/slice';
+import {
+  selectIsAddModalOpen,
+  closeAddModal,
+} from '../../redux/slices/ModalSlice';
 
 Modal.setAppElement('#root');
 

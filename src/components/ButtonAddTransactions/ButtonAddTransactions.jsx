@@ -1,6 +1,6 @@
 import { Icon } from '../../Icons';
-import s from './ButtonAddTransactions.modules.css';
-import { openAddModal } from '../../redux/Modals/slice';
+import s from './ButtonAddTransactions.module.css';
+import { openAddModal } from '../../redux/slices/ModalSlice';
 import { useDispatch } from 'react-redux';
 
 const ButtonAddTransaction = () => {
