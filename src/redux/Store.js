@@ -3,6 +3,8 @@ import authReducer from './slices/AuthSlice';
 import transactionsReducer from './slices/transactionsSlice';
 import globalReducer from './slices/GlobalSlice.jsx';
 import expensesReducer from './slices/expensesSlice.jsx';
+import { statisticsReducer } from './slices/StatisticsSlice';
+import { modalsReducer } from './slices/ModalSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,9 @@ const store = configureStore({
     transactions: transactionsReducer,
     global: globalReducer,
     expenses: expensesReducer,
+
+    statistics: statisticsReducer,
+    modals: modalsReducer,
   },
 });
 
